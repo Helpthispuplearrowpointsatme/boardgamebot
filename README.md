@@ -6,6 +6,7 @@ Games supported:
 - Connect 4 (m,n,k games with gravity)
 - Gomoku/Tic Tac Toe (m,n,k games without gravity)
 - Snort
+
 Coming soon:
 - Go
 - Y

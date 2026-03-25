@@ -132,7 +132,7 @@ class SnortGame(Game):
 
         self.outcome = None
 
-correction_message = "Invalid command format. Please use \"!challenge @[player]\" and optionally add -w [width], and -h [height]."
+correction_message = "Invalid command format. Please optionally add -w [width], and -h [height]."
 
 def parse_settings(args):
     mnk = [5, 5]
@@ -153,7 +153,7 @@ def parse_settings(args):
                 return (False, {}, correction_message + f" Missing value for {flag}.")
 
     if len(args) > 0:
-        return (False, {}, "Error: unrecognized extra arguments: " + " ".join(args))
+        return (False, {}, correction_message + " Unrecognized extra arguments: " + " ".join(args))
 
     for param in mnk:
         if param <= 0 or param > 9:

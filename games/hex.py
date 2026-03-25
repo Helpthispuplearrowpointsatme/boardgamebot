@@ -10,6 +10,8 @@ from coordinate_parser import parse_single_coordinate
 class HexGame(Game):
     def __init__(self, player1, player2, settings):
         Game.__init__(self, player1, player2, settings)
+        self.top_bottom_piece = self.player2_piece
+        self.left_right_piece = self.player1_piece
         self.last_move = None
         self.game_type = "Hex"
         self.add_reactions = False
@@ -76,10 +78,10 @@ class HexGame(Game):
             else:
                 string_of_grid += emoji_numbers[h-1] + "\u200B"
             # Align pieces to rhombus shape
-            string_of_grid += "--" * (h+1) + self.player1_piece
+            string_of_grid += "--" * (h+1) + self.left_right_piece + " "
             for w in range(self.settings["width"]):
-                string_of_grid += (self.gameboard[h - 1][w] if not is_top_or_bottom else self.player2_piece) + " "
-            string_of_grid += self.player1_piece + "\n"
+                string_of_grid += (self.gameboard[h - 1][w] if not is_top_or_bottom else self.top_bottom_piece) + " "
+            string_of_grid += self.left_right_piece + "\n"
 
         return string_of_grid
 
@@ -172,7 +174,7 @@ class HexGame(Game):
 
         self.outcome = Outcome.tie
 
-correction_message = "Invalid command format. Please use \"!challenge @[player]\" and optionally add -w [width], and -h [height]."
+correction_message = "Invalid command format. Please optionally add -w [width], and -h [height]."
 
 def parse_settings(args):
     mnk = [11, 11]
@@ -193,7 +195,7 @@ def parse_settings(args):
                 return (False, {}, correction_message + f" Missing value for {flag}.")
 
     if len(args) > 0:
-        return (False, {}, "Error: unrecognized extra arguments: " + " ".join(args))
+        return (False, {}, correction_message + " Unrecognized extra arguments: " + " ".join(args))
 
     for param in mnk:
         if param <= 0 or param > 15:

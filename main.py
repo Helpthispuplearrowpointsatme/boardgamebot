@@ -113,6 +113,26 @@ class Handler:
                 available_games.append(filename[:-3])
         await channel.send(f"Start a game with \"!gamename\". For example, \"!connect4\" opens an invitation to a Connect 4 game.\nAvailable games: {', '.join(available_games)}")
 
+    async def send_game_rules(self, channel, game_name):
+        game_classes = {
+            "connect4": connect4.Connect4Game,
+            "snort": snort.SnortGame,
+            "othello": othello.OthelloGame,
+            "gomoku": gomoku.GomokuGame,
+            "hex": hex.HexGame,
+            "hextictactoe": hextictactoe.HexTicTacToeGame,
+            "grort": grort.GrortGame,
+        }
+        game_class = game_classes.get(game_name)
+        if game_class is None:
+            await channel.send(f"Unknown game: \"{game_name}\". Use !help to see available games.")
+            return
+        rules = game_class.get_rules()
+        if not rules:
+            await channel.send(f"No rules available for {game_name}.")
+            return
+        await channel.send(f"**{game_name} rules:** {rules}")
+
     async def handle_message(self, message):
         if message.author == client.user:
             return
@@ -133,7 +153,10 @@ class Handler:
         arguments = message_content.split()[1:]
 
         if command == "help":
-            await self.send_help_message(message.channel)
+            if arguments:
+                await self.send_game_rules(message.channel, arguments[0])
+            else:
+                await self.send_help_message(message.channel)
         elif command == "leaderboard":
             await message.channel.send(elo_manager.get_leaderboard())
         else:

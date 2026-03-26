@@ -7,6 +7,14 @@ from game import Game, Outcome
 from emojis import emojis
 
 class Connect4Game(Game):
+    rules = (
+        "Connect 4: Players alternate dropping pieces into a grid. "
+        "Pieces fall to the lowest available row in the chosen column. "
+        "The first player to form a horizontal, vertical, or diagonal line of the "
+        "required length wins. If the board fills with no winner, the game is a draw. "
+        "Move format: enter a column number (e.g. '3')."
+    )
+
     def __init__(self, player1, player2, settings):
         Game.__init__(self, player1, player2, settings)
         self.last_move = None

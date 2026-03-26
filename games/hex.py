@@ -8,6 +8,16 @@ from emojis import emojis, emoji_numbers, emoji_letters
 from coordinate_parser import parse_single_coordinate
 
 class HexGame(Game):
+    rules = (
+        "Hex: Players alternate placing pieces on the board. "
+        "Player 1 (⚫) tries to form an unbroken chain connecting the left and right sides; "
+        "Player 2 (⚪) tries to connect the top and bottom sides. "
+        "The first player to complete their connection wins. "
+        "The pie/swap rule is active: after Player 1's first move, Player 2 may type 'swap' "
+        "to switch sides instead of placing a piece. "
+        "Move format: enter a coordinate such as 'a1'."
+    )
+
     def __init__(self, player1, player2, settings):
         Game.__init__(self, player1, player2, settings)
         self.top_bottom_piece = self.player2_piece

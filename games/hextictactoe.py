@@ -8,6 +8,14 @@ from emojis import emojis, emoji_numbers, emoji_letters
 from coordinate_parser import parse_single_coordinate
 
 class HexTicTacToeGame(Game):
+    rules = (
+        "Hexagonal Tic-Tac-Toe: Player 1 begins with a piece placed at the center of the board. "
+        "Players then alternate placing two pieces per turn. "
+        "The first player to form an unbroken line of the required length "
+        "(along any of the three hex grid axes) wins. "
+        "Move format: enter two coordinates separated by a space (e.g. 'a1 b2')."
+    )
+
     def __init__(self, player1, player2, settings):
         Game.__init__(self, player1, player2, settings)
         self.last_move = None

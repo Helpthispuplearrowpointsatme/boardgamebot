@@ -8,6 +8,12 @@ class Outcome(Enum):
     Player2Win = 2
 
 class Game():
+    rules = ""
+
+    @classmethod
+    def get_rules(cls):
+        return cls.rules
+
     def __init__(self, player1, player2, settings):
         self.player1 = player1
         self.player2 = player2

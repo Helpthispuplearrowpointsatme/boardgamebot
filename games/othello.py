@@ -8,6 +8,14 @@ from emojis import emojis, emoji_numbers, emoji_letters
 from coordinate_parser import parse_single_coordinate
 
 class OthelloGame(Game):
+    rules = (
+        "Othello (Reversi): Players alternate placing pieces on the board. "
+        "A move is legal only if it flanks one or more of the opponent's pieces in a straight "
+        "line (horizontal, vertical, or diagonal), converting those pieces to the current "
+        "player's color. The player with the most pieces when neither player can move wins. "
+        "Move format: enter a coordinate such as 'a1'."
+    )
+
     def __init__(self, player1, player2, settings):
         Game.__init__(self, player1, player2, settings)
         self.last_move = None

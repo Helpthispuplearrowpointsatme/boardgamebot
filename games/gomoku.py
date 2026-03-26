@@ -8,6 +8,14 @@ from emojis import emojis, emoji_numbers, emoji_letters
 from coordinate_parser import parse_single_coordinate
 
 class GomokuGame(Game):
+    rules = (
+        "Gomoku: Players alternate placing pieces on the board. "
+        "The first player to form an unbroken line of the required length "
+        "(horizontally, vertically, or diagonally) wins. "
+        "If the board fills with no winner, the game is a draw. "
+        "Move format: enter a coordinate such as 'a1'."
+    )
+
     def __init__(self, player1, player2, settings):
         Game.__init__(self, player1, player2, settings)
         self.last_move = None
